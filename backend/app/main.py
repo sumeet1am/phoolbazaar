@@ -18,14 +18,21 @@ app = FastAPI(
 )
 
 # CORS Middleware
+origins = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://phoolbazaar-one.vercel.app",
+    "https://phoolbazaar.online",
+    "https://www.phoolbazaar.online",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 @app.on_event("startup")
 def startup_event():
     if USE_EXCEL:
